@@ -74,12 +74,13 @@ android {
             resValue("string", "app_name", "LianYu")
         }
     }
+    // src/shell/AndroidManifest.xml 未随开源仓库提供，调试包改用 src/main 清单，否则桌面没有启动图标
     sourceSets {
-        getByName("debug") {
-            manifest.srcFile("src/shell/AndroidManifest.xml")
-        }
         getByName("release") {
-            manifest.srcFile("src/shell/AndroidManifest.xml")
+            val shellManifest = file("src/shell/AndroidManifest.xml")
+            if (shellManifest.exists()) {
+                manifest.srcFile(shellManifest)
+            }
         }
     }
     compileOptions {

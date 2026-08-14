@@ -86,7 +86,7 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
-        </provider>
+        </provider>
 
         <service
             android:name="com.lianyu.ai.feature.qqbot.service.QQBotForegroundService"
@@ -116,15 +116,21 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-        </receiver>
+        </receiver>
 
+        <!-- 开源调试入口：壳工程缺失时，必须能从桌面打开恋语 -->
         <activity
             android:name=".MainActivity"
-            android:exported="false"
+            android:exported="true"
             android:hardwareAccelerated="true"
             android:theme="@style/Theme.LianYu"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <!-- vivo Push 密钥配置（未配置时留空，SDK 会跳过注册） -->
         <meta-data
